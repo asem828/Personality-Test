@@ -103,9 +103,9 @@ class ScoringService:
             ),
         ]
 
-    # ---------------------------
+
     # Scoring entrypoint
-    # ---------------------------
+
     def score_test(self, test_id: str, answers: Dict[int, int]) -> Dict[str, Any]:
         if test_id == "mbti":
             return self._score_mbti(answers)
@@ -117,9 +117,9 @@ class ScoringService:
             return self._score_temperament(answers)
         raise ValueError(f"Unknown test id: {test_id}")
 
-    # ---------------------------
+ 
     # MBTI
-    # ---------------------------
+
     def _score_mbti(self, answers: Dict[int, int]) -> Dict[str, Any]:
         scores = {k: 0 for k in ["I", "E", "N", "S", "T", "F", "P", "J"]}
         for i, (trait, _) in enumerate(MBTI_QUESTIONS):
@@ -177,7 +177,7 @@ class ScoringService:
             "ENTJ": ("Commander", "Visioner, tegas, dan nyaman memimpin arah strategis."),
         }
 
-        # 1 paragraf panjang PER TYPE (ini yang kamu minta)
+        # paragraf detail
         type_long: Dict[str, str] = {
             "INTP": (
                 "Sebagai INTP, Anda cenderung berpikir dengan cara yang konseptual dan analitis—tertarik pada pola, teori, "
@@ -329,7 +329,7 @@ class ScoringService:
             ),
         }
 
-        # Fallback untuk tipe yang belum didefinisikan (harusnya semua ada)
+        # Fallback untuk tipe yang belum didefinisikan
         if code not in type_long:
             type_long[code] = (
                 "Tipe Anda menunjukkan kombinasi preferensi yang unik. Gunakan laporan ini sebagai peta kebiasaan: bagaimana Anda mengisi energi, "
@@ -413,7 +413,7 @@ class ScoringService:
             "Atur energi sesuai E/I: jadwalkan waktu re-charge (sunyi atau sosial) sebagai bagian produktivitas.",
         ]
 
-        # summary_md: paragraf per-type panjang DI AWAL (paling atas)
+        
         summary = (
             f"**{code} — {name_en}**\n\n"
             f"{type_long[code]}\n\n"
@@ -440,9 +440,9 @@ class ScoringService:
             ],
         }
 
-    # ---------------------------
+    
     # OCEAN
-    # ---------------------------
+
     def _score_ocean(self, answers: Dict[int, int]) -> Dict[str, Any]:
         scores = {k: 0 for k in ["O", "C", "E", "A", "N"]}
         for i, (trait, _) in enumerate(OCEAN_QUESTIONS):
@@ -482,7 +482,7 @@ class ScoringService:
             "N": "Neuroticism (Sensitivitas Stres)",
         }
 
-        # 1 paragraf panjang PER "RESULT TYPE" untuk OCEAN (single + combo)
+   
         profile_long: Dict[str, str] = {
             "O": (
                 "Profil Anda menunjukkan Openness sebagai dimensi yang paling dominan. Secara umum, ini berkaitan dengan rasa ingin tahu, "
@@ -525,7 +525,7 @@ class ScoringService:
                 "konsisten: sleep hygiene, time-box untuk berpikir, journaling, serta latihan regulasi emosi (napas, grounding). Saat stabil, Anda bisa "
                 "mengubah sensitivitas menjadi ketajaman membaca risiko dengan cara yang lebih sehat dan produktif."
             ),
-            # combo (10 kemungkinan)
+            # combo 
             "O_C": (
                 "Profil Anda menggabungkan Openness dan Conscientiousness sebagai dua dimensi teratas. Ini sering menggambarkan kombinasi yang kuat: "
                 "Anda memiliki ide dan kreativitas (O), sekaligus kemampuan menata eksekusi (C). Anda cenderung bisa berpikir inovatif namun tetap "
@@ -602,7 +602,7 @@ class ScoringService:
                 return "rendah"
             return "sedang"
 
-        # Long paragraph per result_type (fallback kalau result_key tidak ada)
+
         long_paragraph = profile_long.get(result_key)
         if not long_paragraph:
             # Generate from top two traits
@@ -675,9 +675,8 @@ class ScoringService:
             ],
         }
 
-    # ---------------------------
     # Enneagram
-    # ---------------------------
+
     def _score_enneagram(self, answers: Dict[int, int]) -> Dict[str, Any]:
         scores = {str(k): 0 for k in range(1, 10)}
         for i, (etype, _) in enumerate(ENNEAGRAM_QUESTIONS):
@@ -723,7 +722,7 @@ class ScoringService:
             "9": "Tenang, damai, dan mediator yang baik.",
         }
 
-        # 1 paragraf panjang PER TYPE Enneagram
+        # paragraf detail
         enneagram_long: Dict[str, str] = {
             "1": (
                 "Sebagai Enneagram Type 1, Anda cenderung berorientasi pada integritas, standar, dan keinginan untuk melakukan hal yang benar. "
@@ -860,9 +859,8 @@ class ScoringService:
             ],
         }
 
-    # ---------------------------
+
     # Temperament
-    # ---------------------------
     def _score_temperament(self, answers: Dict[int, int]) -> Dict[str, Any]:
         scores = {k: 0 for k in ["S", "C", "P", "M"]}
         for i, (trait, _) in enumerate(TEMPERAMENT_QUESTIONS):
@@ -892,7 +890,7 @@ class ScoringService:
             "M": "Teliti, terstruktur, dan peka terhadap kualitas serta detail.",
         }
 
-        # 1 paragraf panjang PER Temperament
+        #paragraf detail
         temp_long: Dict[str, str] = {
             "S": (
                 "Sebagai Sanguine, Anda cenderung antusias, ekspresif, dan mudah membangun suasana yang hidup. Anda biasanya cepat "
