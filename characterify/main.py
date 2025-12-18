@@ -5,7 +5,6 @@ import sys
 
 
 def main() -> int:
-    """App entrypoint. Returns exit code."""
 
     try:
         from PySide6.QtGui import QFont
@@ -73,5 +72,5 @@ def main() -> int:
     return app.exec()
 
 
-if __name__ == "__main__":  # pragma: no cover
+if __name__ == "__main__":  
     raise SystemExit(main())
