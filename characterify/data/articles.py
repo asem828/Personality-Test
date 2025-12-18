@@ -1,17 +1,4 @@
 from __future__ import annotations
-
-"""Learn module content.
-
-Requirements:
- - 25 articles
- - Each article content is >= ~200 words (ID & EN versions)
- - Stored as static data (offline-first)
-
-Notes:
- - Content is educational and non-clinical.
- - Rendered with QTextBrowser (HTML).
-"""
-
 from typing import Dict, List
 
 
